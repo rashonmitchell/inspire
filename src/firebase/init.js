@@ -1,5 +1,15 @@
-import firebase from 'firebase/app'
-import 'firebase/auth'
+/** 
+ * v-8
+ * import firebase from "firebase/app";
+ * import "firebase/auth";
+ * firebase.initializeApp(firebaseConfig)
+ * Initialize Firebase Authentication and get a reference to the service
+ * const auth = firebase.auth();
+ */ 
+
+// v-9
+import { initializeApp } from "firebase/app";
+import { getAuth, connectAuthEmulator } from "firebase/auth";
 
 // The configuration below is not sensitive data. You can serenely add your config here
 const firebaseConfig = {
@@ -12,11 +22,11 @@ const firebaseConfig = {
     measurementId: "G-4K9J522246"
 };
 
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+connectAuthEmulator(auth, "http://localhost:9099");
 
-// // Import the functions you need from the SDKs you need
-// import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-
-// // Initialize Firebase
-// const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
+// Initialize Firebase Authentication and get a reference to the service
+const auth = getAuth(app);
+// const auth = firebase.auth();
+auth.useEmulator("http://localhost:9099");
